@@ -1,50 +1,73 @@
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  StyleSheet, 
+  Alert, 
+  KeyboardAvoidingView, 
+  ScrollView, 
+  Image, 
+  Platform, 
+  Dimensions, 
+  PixelRatio 
+} from "react-native";
 import React from "react";
 import ImageButton from "@/components/ImageButton";
-import { Image } from "react-native";
-
 import { MaterialIcons } from "@expo/vector-icons";
+import { router } from "expo-router";
 
 export default function Login() {
   const [user, setUser] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   const handleLogin = () => {
-    console.log("User: ", user);
-    console.log("Password: ", password);
+    if (user === "fulano" && password === "123") {
+      router.push("/PassagersList")
+    } else {
+      Alert.alert("Falha na autenticação", "Senha ou usuários incorretos!");
+    }
   };
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={require("../assets/images/battlebus.png")} // Caminho da imagem local
-        style={styles.image}
-      />
+    <KeyboardAvoidingView 
+      behavior={Platform.OS === "ios" ? "padding" : "height"} 
+      style={{ flex: 1 }}
+    >
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={styles.container}>
+          <Image
+            source={require("../assets/images/battlebus.png")}
+            style={styles.image}
+          />
 
-      <Text style={styles.titulo}>Bem vindo! ao FornaiBus</Text>
-      <Text style={styles.subtitulo}>Faça seu login</Text>
+          <Text style={styles.titulo}>Bem vindo! ao BattleBus</Text>
+          <Text style={styles.subtitulo}>Faça seu login</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="User"
-        onChangeText={setUser}
-        value={user}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        onChangeText={setPassword}
-        value={password}
-        secureTextEntry={true}
-      />
+          <TextInput
+            style={styles.input}
+            placeholder="User"
+            onChangeText={setUser}
+            value={user}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            onChangeText={setPassword}
+            value={password}
+            secureTextEntry={true}
+          />
 
-      <ImageButton
-        icon={<MaterialIcons name="login" size={24} color="white" />}
-        onPress={handleLogin}
-      />
-    </View>
+          <ImageButton
+            icon={<MaterialIcons name="login" size={24} color="white" />}
+            onPress={handleLogin}
+          />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
+
+const screenWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   container: {
@@ -52,17 +75,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 20,
-    width: "80%",
   },
 
   image: {
-    width: 350,
-    height: 350,
+    width: screenWidth * 0.8, // 70% da largura da tela
+    height: screenWidth * 0.5,
     resizeMode: "contain",
+    marginBottom: 20,
   },
 
   titulo: {
-    fontSize: 20,
+    fontSize: 15,
     textAlign: "center",
     margin: 5,
     fontWeight: "bold",
@@ -77,11 +100,11 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    width: "100%",
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    width: "90%",
     borderRadius: 5,
     borderColor: "#3B82F6",
   },
