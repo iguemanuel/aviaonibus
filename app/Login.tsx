@@ -1,20 +1,21 @@
-import { 
-  View, 
-  Text, 
-  TextInput, 
-  StyleSheet, 
-  Alert, 
-  KeyboardAvoidingView, 
-  ScrollView, 
-  Image, 
-  Platform, 
-  Dimensions, 
-  PixelRatio 
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Alert,
+  KeyboardAvoidingView,
+  ScrollView,
+  Image,
+  Platform,
+  Dimensions,
+  PixelRatio,
 } from "react-native";
 import React from "react";
 import ImageButton from "@/components/ImageButton";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { PRIMARY_COLOR, SECONDARY_COLOR } from "@/constants/themeSettings";
 
 export default function Login() {
   const [user, setUser] = React.useState("");
@@ -22,15 +23,15 @@ export default function Login() {
 
   const handleLogin = () => {
     if (user === "fulano" && password === "123") {
-      router.push("/PassagersList")
+      router.push("../List");
     } else {
       Alert.alert("Falha na autenticação", "Senha ou usuários incorretos!");
     }
   };
 
   return (
-    <KeyboardAvoidingView 
-      behavior={Platform.OS === "ios" ? "padding" : "height"} 
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={{ flex: 1 }}
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: screenWidth * 0.8, // 70% da largura da tela
+    width: screenWidth * 0.8,
     height: screenWidth * 0.5,
     resizeMode: "contain",
     marginBottom: 20,
@@ -89,13 +90,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     margin: 5,
     fontWeight: "bold",
+    color: PRIMARY_COLOR,
   },
 
   subtitulo: {
     fontSize: 14,
     textAlign: "center",
     fontWeight: "bold",
-    color: "#333",
+    color: SECONDARY_COLOR,
     marginBottom: 5,
   },
 
@@ -106,6 +108,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 5,
-    borderColor: "#3B82F6",
+    borderColor: PRIMARY_COLOR,
+    backgroundColor: "#f8f9fa",
   },
 });
