@@ -23,7 +23,7 @@ export default function Login() {
 
   const handleLogin = () => {
     if (user === "fulano" && password === "123") {
-      router.push("../List");
+      router.replace("/List");
     } else {
       Alert.alert("Falha na autenticação", "Senha ou usuários incorretos!");
     }

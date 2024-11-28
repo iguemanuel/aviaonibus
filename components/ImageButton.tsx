@@ -2,9 +2,9 @@ import React from "react";
 import { Pressable, Image, StyleSheet, View } from "react-native";
 
 interface ImageButtonProps {
-  source?: string; // URL da imagem (opcional)
-  icon?: React.ReactNode; // Componente como ícone (opcional)
-  onPress: () => void; // Evento de clique
+  source?: string; 
+  icon?: React.ReactNode;
+  onPress: () => void;
 }
 
 export default function ImageButton({

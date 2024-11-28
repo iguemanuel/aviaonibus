@@ -7,15 +7,10 @@ import { PRIMARY_COLOR } from "@/constants/themeSettings";
 export default function About() {
   const navigation = useNavigation();
 
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => null,
-    });
-  }, [navigation]);
-
   return (
     <View style={styles.container}>
-      <HeaderWithTitle title="Sobre" />
+      <HeaderWithTitle title="Sobre"/>
+      
       <View style={styles.content}>
         <Text style={styles.title}>About</Text>
         <View style={styles.infoBox}>
@@ -81,7 +76,6 @@ const styles = StyleSheet.create({
   githubLink: {
     fontSize: 16,
     color: PRIMARY_COLOR,
-    textAlign: "center",
     marginTop: 10,
   },
 });

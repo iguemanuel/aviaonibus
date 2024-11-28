@@ -1,18 +1,23 @@
-import { View, Text, TouchableOpacity, Alert, StyleSheet } from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import { router } from "expo-router";
+import { usePathname, router } from "expo-router";
 import { PRIMARY_COLOR } from "@/constants/themeSettings";
 
 export default function HeaderMenu() {
   const { showActionSheetWithOptions } = useActionSheet();
+  const currentPath = usePathname(); 
 
   const onPress = () => {
-    const options = ["Sobre", "Logout", "Cancelar"];
-    const destructiveButtonIndex = 1;
-    const cancelButtonIndex = 2;
+    const isAboutPage = currentPath === "/About";
 
+    const options = isAboutPage
+      ? ["Logout", "Cancelar"]
+      : ["Logout", "Cancelar", "Sobre"];
+    const destructiveButtonIndex = 0
+    const cancelButtonIndex = 1 
+   
     showActionSheetWithOptions(
       {
         options,
@@ -22,14 +27,18 @@ export default function HeaderMenu() {
       (selectedIndex?: number) => {
         switch (selectedIndex) {
           case 0:
+            if (router.canDismiss()) {
+              router.dismissAll();
+            }
+            router.replace("/Login");
+            break;
+  
+          case 1: 
+            break;
+            
+            case 2: 
             router.push("/About");
             break;
-
-          case destructiveButtonIndex:
-            router.dismissAll();
-            break;
-
-          case cancelButtonIndex:
         }
       }
     );

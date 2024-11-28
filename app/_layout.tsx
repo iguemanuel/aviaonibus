@@ -5,7 +5,8 @@ import React from "react";
 export default function _layout() {
   return (
     <ActionSheetProvider>
-      <Stack />
+      <Stack>
+      </Stack>
     </ActionSheetProvider>
   );
 }

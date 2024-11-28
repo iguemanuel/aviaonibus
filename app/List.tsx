@@ -24,7 +24,7 @@ export default function List() {
       <HeaderWithTitle title="Lista de Passageiros" />
       <SectionList
         sections={sections}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item,index) => index.toString()}
         renderSectionHeader={({ section: { title } }) => (
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>{title}</Text>
